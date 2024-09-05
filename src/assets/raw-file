@@ -1,0 +1,237 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import Alert from './Alert'; // Import the custom alert
+
+import GlobeIcon from '../assets/Img/globe-icon.svg';
+import GoogleIcon from '../assets/Img/google-icon.png';
+import OpenEyeIcon from '../assets/Img/open-eye-icon.svg';
+import CloseEyeIcon from '../assets/Img/close-eye-icon.svg';
+import Loader from '../assets/Img/loader.gif'; // Add your loader gif or svg
+
+const Signup = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [alert, setAlert] = useState({ type: '', message: '' });
+  const [loading, setLoading] = useState(false); // New state for loading
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (alert.message) {
+      const timer = setTimeout(() => {
+        setAlert({ type: '', message: '' });
+      }, 3000); // Hide alert after 3 seconds
+
+      return () => clearTimeout(timer); // Cleanup on component unmount or alert change
+    }
+  }, [alert]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true); // Set loading to true when submitting
+
+    // Check if the passwords match
+    if (formData.password !== formData.confirmPassword) {
+      setAlert({ type: 'error', message: "Passwords do not match" });
+      setLoading(false); // Reset loading
+      return;
+    }
+
+    try {
+      // API endpoint for user registration
+      const apiUrl = 'https://arts-adada-com-api.onrender.com/api/register/users/';
+
+      // Sending a POST request to the server with user data
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phoneNumber,
+          password: formData.password,
+        }),
+      });
+
+      if (response.ok) {
+        // If the response is OK, display a success message
+        setAlert({ type: 'success', message: 'Account created successfully' });
+        
+        // Store the signup email in localStorage
+        localStorage.setItem('signupEmail', formData.email);
+
+        // Redirect to the login page after 2 seconds
+        setTimeout(() => navigate('/login'), 2000);
+      } else {
+        // If there's an error in the response, handle specific cases
+        const errorData = await response.json();
+        if (errorData.email) {
+          setAlert({ type: 'error', message: errorData.email });
+        } else if (errorData.password) {
+          setAlert({ type: 'error', message: errorData.password });
+        } else if (errorData.phone) {
+          setAlert({ type: 'error', message: errorData.phone });
+        } else {
+          setAlert({ type: 'error', message: 'Failed to create account' });
+        }
+      }
+    } catch (error) {
+      // Catch any network or unexpected errors
+      console.error('Error:', error);
+      setAlert({ type: 'error', message: 'An error occurred while creating the account' });
+    } finally {
+      // Reset loading state regardless of success or failure
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    const tokenId = credentialResponse.credential;
+    alert('Google sign-in successful');
+  };
+
+  const handleGoogleLoginFailure = () => {
+    alert('Google sign-in failed');
+  };
+
+  return (
+    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+      <div className='Reg_SecO Simp_Oosi'>
+        <div className='Reg_Env'>
+          <div className='Top_Nav_l'>
+            <div className='Top_Nav_l_main'>
+              <ul className='Rr_Nav_Ul'>
+                <li>
+                  <Link to='/login' className='signup_btn'>Login</Link>
+                </li>
+              </ul>
+              <div className='Rr_Sec_D'>
+                <div className='lang_Div'>
+                  <span><img src={GlobeIcon} alt="Globe Icon" /></span>
+                  <p>EN</p>
+                  <ul className='lang_DropDown'>
+                    <li>EN</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className='Reg_Form_Sec'>
+            <div className='Reg_Form_Box'>
+              <div className='Reg_Header'>
+                <h3>Signup continue</h3>
+                <GoogleLogin
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={handleGoogleLoginFailure}
+                />
+                <p><span>Or</span></p>
+              </div>
+              <form className='Reg_Form' onSubmit={handleSubmit}>
+                <div className='Reg_Input'>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    placeholder='Full Name'
+                    required
+                  />
+                </div>
+                <div className='Reg_Input'>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder='Email Address'
+                    required
+                  />
+                </div>
+                <div className='Reg_Input'>
+                  <input
+                    type="tel"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    placeholder='Phone Number'
+                    required
+                  />
+                </div>
+                <div className='Reg_Input'>
+                  <div className='Reg_Pass'>
+                    <input
+                      type={isPasswordVisible ? 'text' : 'password'}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      placeholder='Password'
+                      required
+                    />
+                    <span className='ShowHidePass' onClick={togglePasswordVisibility}>
+                      <img
+                        src={isPasswordVisible ? CloseEyeIcon : OpenEyeIcon}
+                        alt={isPasswordVisible ? 'Hide Password' : 'Show Password'}
+                      />
+                    </span>
+                  </div>
+                </div>
+                <div className='Reg_Input'>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    placeholder='Confirm password'
+                    required
+                  />
+                </div>
+                <div className='Reg_Input'>
+                  <button type="submit" disabled={loading} className='submit-button'>
+                    {loading ? (
+                      <>
+                        <span>Submitting</span>
+                        <img src={Loader} alt="Loading..." className='loader' />
+                      </>
+                    ) : (
+                      'Create account'
+                    )}
+                  </button>
+                </div>
+                <div className='Reg_Input'>
+                  <p>By creating an account, you confirm that you have read and agreed to A.R.T.S's <Link to='/terms'>Terms and conditions</Link> and <Link to='/privacy'>Privacy policy</Link>.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {alert.message && (
+          <Alert type={alert.type} message={alert.message} onClose={() => setAlert({ type: '', message: '' })} />
+        )}
+      </div>
+    </GoogleOAuthProvider>
+  );
+};
+
+export default Signup;

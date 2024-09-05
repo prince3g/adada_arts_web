@@ -1,0 +1,272 @@
+
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Light-Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Medium-Italic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Bold-Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-SemiBold-Italic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Bold.woff') format('woff');
+  font-weight:700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-Regular.woff') format('woff');
+  font-weight:normal;
+}
+
+@font-face {
+  font-family: 'Euclid Circular B';
+  src: url('./assets/fonts/Euclid-Circular-B-SemiBold.woff') format('woff');
+  font-weight:600;
+  font-style: normal;
+}
+
+*{
+  box-sizing: border-box;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+html{
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+   scroll-behavior: smooth;
+
+}
+
+
+body {
+  font-family: 'Euclid Circular B', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 100%;
+  background: #fff;
+  color: #111827;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+li{
+  list-style: none;
+}
+a:hover,
+a:focus,
+a{
+  text-decoration: none;
+  color: inherit;
+}
+a,button{
+  outline: none;
+}
+
+
+p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+
+
+
+.mid-container{
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  height: auto;
+}
+.site-container{
+  position: relative;
+ width: 90%;
+  margin-left: 5%;
+  height: auto;
+}
+
+@media screen and (max-width:1300px){
+  .mid-container,
+  .site-container{
+      width: 90% !important;
+      margin-left: 5% !important;
+  }
+}
+
+
+.big-text{
+  font-size: 50px;
+  line-height: 130%;
+}
+@media screen and (max-width:1000px){
+  .Semi-mid-text,
+  .big-text{
+    font-size: 40px !important;
+  }
+}
+@media screen and (max-width:700px){
+  .Semi-mid-text,
+  .big-text{
+    font-size: 30px !important;
+  }
+  .mid-text{
+    font-size: 20px !important;
+  }
+  .big-p{
+    font-size: 16px !important;
+  }
+  .p{
+    font-size: 15px !important;
+  }
+}
+@media screen and (max-width:450px){
+  .p{
+    font-size: 14px !important;
+  }
+}
+.mid-text{
+  font-size: 25px;
+  line-height: 150%;
+  font-weight: 500;
+}
+.Semi-mid-text{
+  font-size: 40px;
+  line-height: 150%;
+  font-weight: 500;
+}
+.big-p{
+  font-size: 18px;
+  line-height: 150%;
+  color: #5f6368 !important;
+}
+.p{
+  font-size: 16px;
+  line-height: 160%;
+  color: #5f6368 !important;
+  margin-top: 10px;
+}
+
+
+
+
+
+/*Button loader */
+.loader {
+  width: 30px; /* Adjust size as needed */
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+
+
+
+.Page_Loader{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.Page_Loader span{
+  font-size: 14px;
+}
+.Page_Loader span img{
+  max-width: 50px;
+  min-height: 20px;
+}
+
+
+@media screen and (max-width:550px){
+  .Page_Loader span img{
+    max-width: 40px !important;
+  }
+}
+
+.loader-container{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  grid-gap: 5px;
+}
+.loader-container img{
+  max-width: 40px !important;
+}
+.loader-container span{
+  font-size: 11px !important;
+  font-style: italic;
+}

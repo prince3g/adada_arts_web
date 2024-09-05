@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://artstraining.co.uk/sitemap.xml
