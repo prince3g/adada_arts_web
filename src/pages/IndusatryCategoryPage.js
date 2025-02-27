@@ -13,6 +13,7 @@ import CourseImg2 from '../assets/Img/coursesImg/2.jpg';
 import AbtImg4 from '../assets/Img/AbtImg4.png';
 
 const IndustryCategoryPage = () => {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [slideCount, setSlideCount] = useState(0);
   const [isPrevVisible, setIsPrevVisible] = useState(false);
   const [isNextVisible, setIsNextVisible] = useState(true);
@@ -28,7 +29,7 @@ const IndustryCategoryPage = () => {
     const fetchCategories = async () => {
       setLoading(true); // Set loading to true when fetching data
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
         const filteredCategories = data.filter(category => category.mainCategory.id === 1);
         setIndustryCategories(filteredCategories);
@@ -57,7 +58,7 @@ const IndustryCategoryPage = () => {
     const fetchAllCategories = async () => {
       setLoading(true); // Set loading to true when fetching data
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
         setAllCategories(data);
       } catch (error) {

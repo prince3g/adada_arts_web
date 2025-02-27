@@ -13,7 +13,7 @@ const SubNavbar = ({ isSubNavVisible }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
 
         const industry = data.filter(category => category.mainCategory.name === "Health Care");
@@ -33,7 +33,7 @@ const SubNavbar = ({ isSubNavVisible }) => {
   const handleSearch = async () => {
     if (searchTerm) {
       try {
-        const response = await fetch(`https://cmvp.net/api/v1/free/api/courses/search/?q=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(`${API_HOST}api/courses/search/?q=${encodeURIComponent(searchTerm)}`);
         const data = await response.json();
         
         // Navigate to the search results page with searchTerm as query parameter

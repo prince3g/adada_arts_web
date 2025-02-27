@@ -21,6 +21,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import the calendar styles
 
 function AdminHome() {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [showCourseUpload, setShowCourseUpload] = useState(false);
   const [showAddInstructor, setShowAddInstructor] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
@@ -38,7 +39,7 @@ function AdminHome() {
     // Fetch the number of courses
     const fetchCoursesCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/courses/');
+        const response = await fetch(`${API_HOST}api/courses/courses/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -56,7 +57,7 @@ function AdminHome() {
     // Fetch the number of categories
     const fetchCategoriesCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -74,7 +75,7 @@ function AdminHome() {
     // Fetch the number of instructors
     const fetchInstructorsCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/instructors/');
+        const response = await fetch(`${API_HOST}api/courses/instructors/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -92,7 +93,7 @@ function AdminHome() {
     // Fetch the number of users
     const fetchUsersCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/register/users/');
+        const response = await fetch(`${API_HOST}api/register/users/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

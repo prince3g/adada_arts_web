@@ -199,6 +199,7 @@ import MessageEditor from './MessageEditor';
 import Alert from './Alert';
 
 const AddCategory = ({ category, onClose, onUpdate }) => {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [mainCategoryId, setMainCategoryId] = useState('');
   const [title, setTitle] = useState('');
   const [banner, setBanner] = useState(null);
@@ -214,7 +215,7 @@ const AddCategory = ({ category, onClose, onUpdate }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://cmvp.net/api/v1/free/api/courses/mainCategory/');
+        const response = await axios.get(`${API_HOST}api/courses/mainCategory/`);
         setCategories(response.data);
       } catch (err) {
         console.error('Error fetching categories:', err);
@@ -262,8 +263,8 @@ const AddCategory = ({ category, onClose, onUpdate }) => {
     }
 
     const url = category
-      ? `https://cmvp.net/api/v1/free/api/courses/category/${category.id}/`
-      : 'https://cmvp.net/api/v1/free/api/courses/category/';
+      ? `${API_HOST}api/courses/category/${category.id}/`
+      : `${API_HOST}api/courses/category/`;
     const method = category ? 'PATCH' : 'POST';
 
     try {

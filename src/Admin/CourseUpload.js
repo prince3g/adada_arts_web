@@ -480,6 +480,7 @@ const CourseUpload = ({ onClose, course }) => {
   const [selectedInstructor, setSelectedInstructor] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [courseId, setCourseId] = useState(null);
+  const API_HOST = process.env.REACT_APP_API_HOST;
 
   const token = localStorage.getItem("authToken");
   const navigate = useNavigate();
@@ -488,7 +489,7 @@ const CourseUpload = ({ onClose, course }) => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/instructors/');
+        const response = await fetch(`${API_HOST}api/courses/instructors/`);
         if (!response.ok) throw new Error('Failed to fetch instructors');
         const data = await response.json();
         setInstructors(data);
@@ -499,7 +500,7 @@ const CourseUpload = ({ onClose, course }) => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         if (!response.ok) throw new Error('Failed to fetch categories');
         const data = await response.json();
         setCategories(data);
@@ -553,8 +554,8 @@ const CourseUpload = ({ onClose, course }) => {
 
     try {
       const url = courseId
-        ? `https://cmvp.net/api/v1/free/api/courses/courses/${courseId}/`
-        : 'https://cmvp.net/api/v1/free/api/courses/courses/';
+        ? `${API_HOST}api/courses/courses/${courseId}/`
+        : `${API_HOST}api/courses/courses/`;
       const method = courseId ? 'PATCH' : 'POST';
 
       const response = await fetch(url, {

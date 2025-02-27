@@ -4,7 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const API_HOST = process.env.REACT_APP_API_HOST;
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const apiUrl = 'https://cmvp.net/api/v1/free/api/register/login/';
+    const apiUrl =`${API_HOST}api/register/login/`;
     
     const response = await fetch(apiUrl, {
       method: 'POST',

@@ -18,6 +18,7 @@ import CcIcon4 from '../assets/Img/Cc-icon4.svg';
 const NavbarWrapper = lazy(() => import('./NavbarWrapper'));
 
 const CoursesPage = () => {
+    const API_HOST = process.env.REACT_APP_API_HOST;
     // Extract the category ID from the URL
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
@@ -49,16 +50,16 @@ const CoursesPage = () => {
     // Fetch courses from the API using the category ID from the URL
     useEffect(() => {
         if (categoryId) {
-            fetch(`https://cmvp.net/api/v1/free/api/courses/category/${categoryId}`)
+            fetch(`${API_HOST}api/courses/category/${categoryId}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Fetched data:', data); // Log the fetched data
                     if (data && Array.isArray(data.courses)) {
                       setCategoryImage(data.image)
                         setCourses(data.courses); // Set the fetched courses data
-                        console.log("categoryImage")
-                        console.log(categoryImage)
-                        console.log("categoryImage")
+                        // console.log("categoryImage")
+                        // console.log(categoryImage)
+                        // console.log("categoryImage")
                     } else {
                         console.error('Expected data to have a "courses" key with an array value, but got:', data);
                     }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from './Img/page-loader.gif'; // Import the loader GIF
 
 const UsersTable = ({ markedAll, sortOrder }) => {
+    const API_HOST = process.env.REACT_APP_API_HOST;
     const [users, setUsers] = useState([]); 
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
@@ -12,7 +13,7 @@ const UsersTable = ({ markedAll, sortOrder }) => {
         const fetchUsers = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`https://cmvp.net/api/v1/free/api/register/users/?page=${page}&pageSize=${pageSize}`);
+                const response = await fetch(`${API_HOST}api/register/users/?page=${page}&pageSize=${pageSize}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

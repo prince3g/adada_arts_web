@@ -36,13 +36,14 @@ import CllaImg2 from '../assets/Img/CllaImg/2.png';
 import CllaImg3 from '../assets/Img/CllaImg/3.png';
 
 const Home = () => {
+
   const [slideCount, setSlideCount] = useState(0);
   const [isPrevVisible, setIsPrevVisible] = useState(false);
   const [isNextVisible, setIsNextVisible] = useState(true);
   const sliderRef = useRef(null);
   const [activeBtn, setActiveBtn] = useState('health');
   const [categories, setCategories] = useState([]);
-
+ const API_HOST = process.env.REACT_APP_API_HOST;
   const [healthCategories, setHealthCategories] = useState([]);
   const [popularCategories, setPopularCategories] = useState([]);
   const [popularCoursesCount, setPopularCoursesCount] = useState(0);
@@ -74,7 +75,7 @@ const Home = () => {
     const fetchHealthCategories = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
      
         const filteredCategories = data.filter(category => category.mainCategory.name === "Health Care");
@@ -104,7 +105,7 @@ const Home = () => {
     const fetchLeadershipCategories = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
         const filteredCategories = data.filter(category => category.mainCategory.id === 2);
 
@@ -125,7 +126,7 @@ const Home = () => {
     const fetchPopularCategories = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
         setPopularCategories(data);
         setPopularCoursesCount(data.reduce((sum, category) => sum + category.courses.length, 0));
@@ -203,7 +204,7 @@ const Home = () => {
   const handleSearch = async () => {
     if (searchTerm) {
       try {
-        const response = await fetch(`https://cmvp.net/api/v1/free/api/courses/search/?q=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(`${API_HOST}api/courses/search/?q=${encodeURIComponent(searchTerm)}`);
         const data = await response.json();
         
         // Navigate to the search results page with searchTerm as query parameter

@@ -14,6 +14,7 @@ import ADDNotice from './AddNotice';
 import 'react-calendar/dist/Calendar.css'; // Import the calendar styles
 
 function CourseCategoryPage() {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [showCategoryUpload, setShowCategoryUpload] = useState(false);
   const [showAddInstructor, setShowAddInstructor] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
@@ -28,7 +29,7 @@ function CourseCategoryPage() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await axios.get(`${API_HOST}/api/courses/category/`);
         setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);

@@ -24,7 +24,7 @@ const CourseTable = ({ markedAll, sortOrder }) => {
         const fetchCategories = async () => {
             if (!categoriesCache.current) {
                 try {
-                    const response = await fetch(`https://cmvp.net/api/v1/free/api/courses/category/`);
+                    const response = await fetch(`${API_HOST}api/courses/category/`);
                     //const response = await fetch(`${API_HOST}api/courses/category/`);
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -45,7 +45,7 @@ const CourseTable = ({ markedAll, sortOrder }) => {
         const fetchInstructors = async () => {
             if (!instructorsCache.current) {
                 try {
-                    const response = await fetch(`https://cmvp.net/api/v1/free/api/courses/instructors/`);
+                    const response = await fetch(`${API_HOST}api/courses/instructors/`);
                     //const response = await fetch(`${API_HOST}api/courses/instructors/`);
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -73,7 +73,7 @@ const CourseTable = ({ markedAll, sortOrder }) => {
                     fetchInstructors(),
                 ]);
 
-                const response = await fetch(`https://cmvp.net/api/v1/free/api/courses/courses/`);
+                const response = await fetch(`${API_HOST}api/courses/courses/`);
                 //const response = await fetch(`${API_HOST}api/courses/courses/`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -120,7 +120,7 @@ const CourseTable = ({ markedAll, sortOrder }) => {
         if (window.confirm('Are you sure you want to remove this course?')) {
             try {
                 const token = localStorage.getItem('authToken'); // Replace 'authToken' with your actual token key name
-                await axios.delete(`https://cmvp.net/api/v1/free/api/courses/courses/${id}`, {
+                await axios.delete(`${API_HOST}api/courses/courses/${id}`, {
                 //await axios.delete(`${API_HOST}api/courses/courses/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`

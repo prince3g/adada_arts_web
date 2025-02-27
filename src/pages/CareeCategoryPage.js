@@ -11,6 +11,7 @@ import CourserIcon1 from '../assets/Img/student.png';
 import CourserIcon2 from '../assets/Img/write.png';
 
 const CareerCategoryPage = () => {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [slideCount, setSlideCount] = useState(0);
   const [isPrevVisible, setIsPrevVisible] = useState(false);
   const [isNextVisible, setIsNextVisible] = useState(true);
@@ -26,7 +27,7 @@ const CareerCategoryPage = () => {
     const fetchCategories = async () => {
       setIsLoading(true); // Set loading to true when fetching data
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         const data = await response.json();
         const filteredCategories = data.filter(category => category.mainCategory === 2);
         setCategories(filteredCategories);
@@ -42,7 +43,7 @@ const CareerCategoryPage = () => {
     const fetchPopularCategories = async () => {
       setIsLoading(true); // Set loading to true when fetching data
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}/api/courses/category/`);
         const data = await response.json();
         setPopularCategories(data);
         setPopularCoursesCount(data.reduce((sum, category) => sum + category.courses.length, 0));

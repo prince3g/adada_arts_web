@@ -6,6 +6,7 @@ import UsersTable from './UsersTable'; // Assuming you have a UsersTable compone
 import 'react-calendar/dist/Calendar.css'; // Import the calendar styles
 
 function UsersPage() {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [allMarked, setAllMarked] = useState(false);
   const [sortOrder, setSortOrder] = useState('mostRecent'); // Default sorting
   const [showCalendar, setShowCalendar] = useState(false);
@@ -16,7 +17,7 @@ function UsersPage() {
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/register/users/');
+        const response = await fetch(`${API_HOST}api/register/users/`);
         if (response.ok) {
           const data = await response.json();
           setUserCount(data.length); // Assuming the response is an array of users

@@ -20,7 +20,7 @@ const SearchResult = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const searchQuery = queryParams.get('q') || ''; // Fallback to empty string if no query
-
+    const API_HOST = process.env.REACT_APP_API_HOST;
     const [courseStatus, setCourseStatus] = useState('all-courses');
     const [methodOfLearning, setMethodOfLearning] = useState('all-courses');
     const [fees, setFees] = useState('all-courses');
@@ -46,7 +46,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         if (searchQuery) {
-            fetch(`https://cmvp.net/api/v1/free/api/courses/search/?q=${searchQuery}`)
+            fetch(`${API_HOST}api/courses/search/?q=${searchQuery}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Fetched data:', data); // Log the fetched data

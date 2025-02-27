@@ -3,6 +3,7 @@ import AllIcon from './Img/all-arrow.svg';
 import AdminAd from './Img/adminAd.png';
 
 function DailyUsage() {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [instructorsCount, setInstructorsCount] = useState(0);
   const [coursesCount, setCoursesCount] = useState(0);
   const [categoriesCount, setCategoriesCount] = useState(0);
@@ -17,7 +18,7 @@ function DailyUsage() {
   useEffect(() => {
     const fetchInstructorsCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/instructors/');
+        const response = await fetch(`${API_HOST}api/courses/instructors/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -30,7 +31,7 @@ function DailyUsage() {
 
     const fetchCoursesCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/courses/');
+        const response = await fetch(`${API_HOST}api/courses/courses/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -43,7 +44,7 @@ function DailyUsage() {
 
     const fetchCategoriesCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/courses/category/');
+        const response = await fetch(`${API_HOST}api/courses/category/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -56,7 +57,7 @@ function DailyUsage() {
 
     const fetchRegisteredUsersCount = async () => {
       try {
-        const response = await fetch('https://cmvp.net/api/v1/free/api/register/users/');
+        const response = await fetch(`${API_HOST}api/register/users/`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

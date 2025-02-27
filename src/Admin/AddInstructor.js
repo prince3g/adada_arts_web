@@ -7,7 +7,7 @@ import Alert from './Alert';
 
 const AddInstructor = ({ instructor, onClose, onUpdate }) => {
 
- 
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [profileImage, setProfileImage] = useState(UserProfile);
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -76,8 +76,8 @@ const AddInstructor = ({ instructor, onClose, onUpdate }) => {
     }
     
     const url = instructor
-      ? `https://cmvp.net/api/v1/free/api/courses/instructors/${instructor.sn}/`
-      : 'https://cmvp.net/api/v1/free/api/courses/instructors/';
+      ? `${API_HOST}api/courses/instructors/${instructor.sn}/`
+      : `${API_HOST}api/courses/instructors/`;
       
     const method = instructor ? 'PATCH' : 'POST';
 

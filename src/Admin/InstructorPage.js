@@ -12,6 +12,7 @@ import ADDNotice from './AddNotice';
 import InstructorsTable from './InstructorsTable';
 
 function InstructorPage() {
+  const API_HOST = process.env.REACT_APP_API_HOST;
   const [showCourseUpload, setShowCourseUpload] = useState(false);
   const [showAddInstructor, setShowAddInstructor] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
